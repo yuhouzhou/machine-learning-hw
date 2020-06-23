@@ -1,0 +1,73 @@
+\documentclass[a4 paper]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{bm}
+%\usetikzlibrary{through,backgrounds}
+\hypersetup{%
+pdfauthor={Ashudeep Singh},%
+pdftitle={Homework},%
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+pdfcreator={PDFLaTeX},%
+pdfproducer={PDFLaTeX},%
+}
+%\usetikzlibrary{shadows}
+% \usepackage[francais]{babel}
+\usepackage{booktabs}
+\input{macros.tex}
+
+
+\begin{document}
+\homework{Assignment 4}{Due: 16.04.2020 23:55}{Dr. Sergey Kosov}{Yuhou Zhou}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+    \item The homework assignments are for practice purpose. The grade from your homework will not affect your final grade of the course.
+    \item Please submit your answer sheet, either by a scanned copy or a typeset PDF file, to Moodle before the deadline.
+    \item No late submission is accepted.
+    \item You can do this assignment in groups of 2. Please submit no more than one submission per group.
+\end{itemize}
+
+\problem{1: Support Vector Machine}{5}
+\subproblem{a} Show that the value $\rho$ of the margin for the maximum-margin hyperplane is given by 
+\begin{equation*}
+    \frac{1}{\rho^2}=\sum_{n=1}^N a_n
+\end{equation*}
+where ${a_n}$ are given by\\ 
+\begin{align*}
+   \text{maximize} \qquad \widetilde{L}(\mathbf{a})&=\sum_{n=1}^N a_n-\frac{1}{2}\sum_{n=1}^N \sum_{m=1}^N a_na_mt_nt_mk(\mathbf{x}_n\mathbf{x}_m)\\
+   \text{subject to} \qquad a_n&\geqslant0, \qquad n=1,\dots,N,\\
+   \sum_{n=1}^N a_n t_n &= 0.
+\end{align*}
+
+\vspace{\stretch{1}}
+
+\newpage
+
+\problem{2: Random Forest}{5+5=10}
+\subproblem{a} Show that as the number of the bootstrap samples $B$ gets large, the out-of-bag error for a random forest approaches its N-fold cross validation error estimate, and that in the limit, the identity is exact.
+
+\vspace{\stretch{1}}
+
+\subproblem{b} Suppose $x_{i}, i=1, \ldots, N$ are iid $\left(\mu, \sigma^{2}\right) .$ Let $\bar{x}_{1}^{*}$ and $\bar{x}_{2}^{*}$ be two bootstrap realizations of the sample mean. Show that the sampling correlation $\operatorname{corr}\left(\bar{x}_{1}^{*}, \bar{x}_{2}^{*}\right)=\frac{n}{2 n-1} \approx 50 \% .$ Along the way, derive $\operatorname{var}\left(\bar{x}_{1}^{*}\right)$ and the variance
+of the bagged mean $\bar{x}_{b a g} .$ Here $\bar{x}$ is a linear statistic; bagging produces no reduction in variance for linear statistics.
+
+\vspace{\stretch{1}}
+
+\problem{3: Artificial Neural Network}{5+5=10}
+\subproblem{a} Show that maximizing likelihood for a multiclass neural network model in which the network outputs have the interpretation $y_k(\mathbf{x}, \mathbf{w}) = p(t_k = 1|\mathbf{x})$ is equivalent to the minimization of the cross-entropy error function $E(\mathbf{w})=-\sum_{n=1}^{N} \sum_{k=1}^{K} t_{k n} \ln y_{k}\left(\mathbf{x}_{n}, \mathbf{w}\right)$.
+
+\vspace{\stretch{1}}
+
+\subproblem{b} Consider a convolutional network, in which multiple weights are constrained to have the same value. Discuss how the standard backpropagation algorithm must be modified in order to ensure that such constraints are satisfied when evaluating the derivatives of an error function with respect to the adjustable parameters in the network.
+
+\vspace{\stretch{1}}
+
+\end{document} 

@@ -1,0 +1,93 @@
+\documentclass[a4 paper]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{bm}
+%\usetikzlibrary{through,backgrounds}
+\hypersetup{%
+pdfauthor={Ashudeep Singh},%
+pdftitle={Homework},%
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+pdfcreator={PDFLaTeX},%
+pdfproducer={PDFLaTeX},%
+}
+%\usetikzlibrary{shadows}
+% \usepackage[francais]{babel}
+\usepackage{booktabs}
+\input{macros.tex}
+
+
+\begin{document}
+\homework{Assignment 2}{Due: 16.04.2020 23:55}{Dr. Sergey Kosov}{Yuhou Zhou}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+    \item The homework assignments are for practice purpose. The grade from your homework will not affect your final grade of the course.
+    \item Please submit your answer sheet, either by a scanned copy or a typeset PDF file, to Moodle before the deadline.
+    \item No late submission is accepted.
+    \item You can do this assignment in groups of 2. Please submit no more than one submission per group.
+\end{itemize}
+
+\problem{1: K-nearest Neighbors}{2.5+2.5+5=10}
+\subproblem{a} Given a 2 dimensional data set:
+\begin{equation*}
+    T = \{(2, 3)^T, (5, 4)^T, (9, 6)^T, (4, 7)^T, (8, 1)^T, (7, 2)^T\}
+\end{equation*}
+Construct a balanced kd-tree.
+
+\vspace{\stretch{1}}
+
+\subproblem{b} Use the kd-tree constructed in problem (a) to find the nearest point of $x=(3, 4.5)^T$.
+
+\vspace{\stretch{1}}
+\newpage
+
+\subproblem{c} Show that the k-nearest-neighbour density model defines an improper distribution whose integral over all space is divergent.
+
+\vspace{\stretch{1}}
+
+\problem{2: Gaussian Mixture Model}{5+5+5+5=20}
+\subproblem{a} Consider a Gaussian mixture model in which the marginal distribution $p(\mathbf{z})$ for the latent vatiable is given by $p(\mathbf{z})=\prod_{k=1}^{K} \pi_k^{z_k}$, and the conditional distribution $p(\mathbf{x}|\mathbf{z})$ for the observaed variable is given by $p(\mathbf{x}|\mathbf{z})=\prod_{k=1}^{K} \mathcal{N}(\mathbf{x}|\bm{\mu}_k, \bm{\Sigma}_k)^{z_k} $. Show that the marginal distribution $p(\mathbf{x})$, obtained by summing $p(\mathbf{z})p(\mathbf{x}|\mathbf{z})$ over all possible values of $\mathbf{z}$, is a Gaussian mixture of the form $p(\mathbf{x})=\sum_{k=1}^{K} \pi _k \mathcal{N}(\mathbf{x}|\bm{\mu}_k, \bm{\Sigma}_k)$.
+
+Note: $\mathbf{z}$ uses 1-of-K representation.
+
+\vspace{\stretch{1}}
+\newpage
+
+\subproblem{b} Verify that maximization of the complete-data log likelihood 
+\begin{equation*}
+    \ln p(\mathbf{X,Z}|\bm{\mu}, \bm{\Sigma}, \bm{\pi}) = \sum_{n=1}^N \sum_{k=1}^K z_{nk} \{\ln \pi _k + \ln \mathcal{N} (\mathbf{x}_n | \bm{\mu}_k, \bm{\Sigma}_k) \}
+\end{equation*}
+% $\ln p(\mathbf{X,Z}|\bm{\mu}, \bm{\Sigma}, \bm{\pi}) = \sum_{n=1}^N \sum_{k=1}^K z_{nk} \{\ln \pi _k + \ln \mathcal{N} (\mathbf{x}_n | \bm{\mu}_k, \bm{\Sigma}_k) \}$ 
+for a Gaussian mixture model leads to the result that the means and covariances of each component are fitted independently to the corresponding group of data points, and the mixing coefficients are given by the fractions of points in each group.
+
+\vspace{\stretch{1}}
+
+\subproblem{c} Show that if we maximize
+\begin{equation*}
+    \mathbb{E}_\mathbf{z}[\ln p(\mathbf{X,Z}|\bm{\mu}, \bm{\Sigma}, \bm{\pi})] = \sum_{n=1}^N \sum_{k=1}^K \gamma (z_{nk})\{\ln \pi _k + \ln \mathcal{N} (\mathbf{x}_n | \bm{\mu}_k, \bm{\Sigma}_k) \}
+\end{equation*}
+with respect to $\bm{\mu}_k$ while keeping the responsibilities $\gamma (z_nk)$ fixed, we obtain the closed form solution given by
+\begin{equation*}
+    \bm{\mu}_k = \frac{1}{N_k} \sum_{n=1}^N \gamma(z_{nk})\mathbf{x}_n
+\end{equation*}
+
+\vspace{\stretch{1}}
+\newpage
+
+\subproblem{d} Consider a density model given by a mixture distribution 
+\begin{equation*}
+    p(\mathbf{x})=\sum_{k=1}^{K} \pi _k p(\mathbf{x}|k)
+\end{equation*}
+% $p(\mathbf{x})=\sum_{k=1}^{K} \pi _k p(\mathbf{x}|k)$ 
+and suppose that we partition the vector $\mathbf{x}$ into two parts so that $\mathbf{x}=(\mathbf{x}_a, \mathbf{x}_b)$. Show that the conditional density $p(\mathbf{x}_b|\mathbf{x}_a)$ is itself a mixture distribution and find expressions for the mixing coefficients and for the component densities.
+\vspace{\stretch{1}}
+
+\end{document} 

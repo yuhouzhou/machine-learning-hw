@@ -1,0 +1,75 @@
+\documentclass[a4 paper]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+%\usetikzlibrary{through,backgrounds}
+\hypersetup{%
+pdfauthor={Ashudeep Singh},%
+pdftitle={Homework},%
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+pdfcreator={PDFLaTeX},%
+pdfproducer={PDFLaTeX},%
+}
+%\usetikzlibrary{shadows}
+% \usepackage[francais]{babel}
+\usepackage{booktabs}
+\input{macros.tex}
+
+
+\begin{document}
+\homework{Assignment 1}{Due: 02.04.2020 23:55}{Dr. Sergey Kosov}{Yuhou Zhou}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+    \item The homework assignments are for practice purpose. The grade from your homework will not affect your final grade of the course.
+    \item Please submit your answer sheet, either by a scanned copy or a typeset PDF file, to Moodle before the deadline.
+    \item No late submission is accepted.
+    \item You can do this assignment in groups of 2. Please submit no more than one submission per group.
+\end{itemize}
+
+\problem{1: Factorization of joint distributions}{2.5+2.5=5}
+Here we use the standard shorthand notation $P(x,y)$ for $P(X=x, Y=y)$, $P(x|y)$ for $P(X=x | Y=y)$, etc. Prove the following \textit{factorization formula}
+
+\subproblem{a} $P(x, y, z) = P(x)P(y|x)P(z|x,y)$,
+
+\subproblem{b} $P(u|v_1,\dots, v_n) = P(u, v_1,\dots, v_n) / P(v_1, \dots, v_n)$.\\
+
+Note: in statistics and machine learning in general, factorizing joint distributions into products of simpler distributions is a super common strategy.
+
+% \newpage
+
+\problem{2: Expectation, Variance, and Covariance}{2.5+2.5+2.5+2.5+5+5=20}
+\subproblem{a} Use $var[f(x)]=\mathbb{E}[(f(x)-\mathbb{E}[f(x)])^2]$ show that $var[f(x)]$ satisfies $var[f(x)]=\mathbb{E}[f(x)^2] - \mathbb{E}[f(x)]^2$.
+
+\subproblem{b} Show that if two variables $x$ and $y$ are independent, then their covariance is zero.
+
+\subproblem{c} Suppose that the two variables $x$ and $z$ are statistically independent. Show that the mean and variance of their satisfies
+
+\begin{align*}
+    \mathbb{E}[x+z] &= \mathbb{E}[x]+\mathbb{E}[z]\\
+    var[x+z] &= var[x]+var[z]
+\end{align*}
+
+\subproblem{d} Give a derivation for the formula $Cov(X,Y)=\mathbb{E}[XY]-\mathbb{E}[X]\mathbb{E}[Y].$
+
+\subproblem{e} Prove that the mean minimizes the quadratic loss, that is, for a random variable $X$ with values in $\mathbb{R}$,
+
+\begin{equation*}
+    \mathbb{E}[X]=argmin_{x \in \mathbb{R}} (\mathbb{E}[(x-X)^2])
+\end{equation*}
+Note: $argmin$ refers to the inputs, or arguments, at which the function outputs are as small as possible. e.g. $argmin_x(2x^2+4x-8)=-1$
+
+\subproblem{f} Show that for two random variables $X, Y$ with values in $\mathbb{R}$, it holds that $-1\leq Corr(X,Y) \leq 1$. (Assuming that both RVs don't have zero standard deviation and that their joint distribution is characterized by a p.d.f. $f(x,y)$). You may use the following fact (a special case of the so-called \textit{Cauchy-Schwarz inequality}):
+\begin{equation*}
+    (\int_{\mathbb{R}^2} xy f(x,y) d(x,y) )^2 \leq \int_{\mathbb{R}^2} x^2 f(x,y) d(x,y) \cdot \int_{\mathbb{R}^2} y^2 f(x,y) d(x,y)
+\end{equation*}
+where $f$ is a p.d.f. on $\mathbb{R}^2$.
+
+\end{document} 

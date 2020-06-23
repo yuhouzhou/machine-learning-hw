@@ -1,0 +1,91 @@
+\documentclass[a4 paper]{article}
+% Set target color model to RGB
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\usepackage[rgb]{xcolor}
+\usepackage{verbatim}
+\usepackage{subcaption}
+\usepackage{amsgen,amsmath,amstext,amsbsy,amsopn,tikz,amssymb,tkz-linknodes}
+\usepackage{fancyhdr}
+\usepackage[colorlinks=true, urlcolor=blue,  linkcolor=blue, citecolor=blue]{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{rotating}
+\usepackage{bm}
+%\usetikzlibrary{through,backgrounds}
+\hypersetup{%
+pdfauthor={Ashudeep Singh},%
+pdftitle={Homework},%
+pdfkeywords={Tikz,latex,bootstrap,uncertaintes},%
+pdfcreator={PDFLaTeX},%
+pdfproducer={PDFLaTeX},%
+}
+%\usetikzlibrary{shadows}
+% \usepackage[francais]{babel}
+\usepackage{booktabs}
+\input{macros.tex}
+
+
+
+\begin{document}
+\homework{Assignment 4}{Due: 16.04.2020 23:55}{Dr. Sergey Kosov}{Yuhou Zhou}
+\textbf{Course Policy}: Read all the instructions below carefully before you start working on the assignment, and before you make a submission.
+\begin{itemize}
+    \item The homework assignments are for practice purpose. The grade from your homework will not affect your final grade of the course.
+    \item Please submit your answer sheet, either by a scanned copy or a typeset PDF file, to Moodle before the deadline.
+    \item No late submission is accepted.
+    \item You can do this assignment in groups of 2. Please submit no more than one submission per group.
+\end{itemize}
+
+\problem{1: Support Vector Machine}{5}
+\subproblem{a} Show that, irrespective of the dimensionality of the data space, a data set consisting of just two data points, one from each class, is sufficient to determine the location of the maximum-margin hyperplane.\\
+
+Suppose we have $\mathbf{x}_{1}$ belongs to class one and we denote its target value $t_{1}=1,$ and similarly $\mathbf{x}_{2}$ belongs to class two and we denote its target value $t_{2}=-1 .$ Since we only have two points, they must have $t_{i} \cdot y\left(\mathbf{x}_{i}\right)=1$. Therefore, we have an equality constrained optimization problem:
+\[
+\operatorname{minimize} \frac{1}{2}\|\mathbf{w}\|^{2} \quad \text { s.t. }\left\{\begin{array}{l}
+\mathbf{w}^{T} \boldsymbol{\phi}\left(\mathbf{x}_{1}\right)+b=1 \\
+\mathbf{w}^{T} \boldsymbol{\phi}\left(\mathbf{x}_{2}\right)+b=-1
+\end{array}\right.
+\]
+The cost function is convex and constrains are affine, so this is an convex optimization problem. It can be solved using Lagrange multiplier.\\
+
+\textit{Note: Read PRML Section 7.1 until the formula (7.4).}
+
+% \vspace{\stretch{1}}
+
+% \newpage
+
+\problem{2: Random Forest}{5}
+\subproblem{a} Show that as the number of the bootstrap samples $B$ gets large, the out-of-bag error for a random forest approaches its N-fold cross validation error estimate, and that in the limit, the identity is exact.\\
+
+The out-of-bag error is given by
+\begin{equation}\label{eq:1}
+    \mathcal{E}_{OOB} = \frac{1}{N} \sum_{i=1}^N \frac{1}{Z_i} \sum_{\substack{j \\ (x_i, y_i) \notin D_j}} \ell(h_j(x_i), y_i)
+\end{equation}
+where $D_j$ is the bagging sample which does not include $(x_i, y_i)$. $h_j$ is the classifier trained on $D_j$. $\ell$ is the cost function. $Z_i$ is the number of classifiers not trained on $(x_i, y_i)$.\\
+The LOOCV error for Random Forest is given by
+\begin{equation}\label{eq:2}
+    \mathcal{E}_{LOOCV} = \frac{1}{N} \sum_{i=1}^N \frac{1}{B} \sum_{j=1}^B \ell(h_{ij}(x_i), y_i)
+\end{equation}
+where index $i$ of $h_{ij}$ means $(x_i, y_i)$ is the validation data point for the random forest, and index $j$ means the $j$th tree of the forest.\\
+Assume we have infinite Bagging samples $B=\infty$. The probability that a point is not picked in a bagging sample is $(1-\frac{1}{N})^N \approx \frac{1}{e}$. $Z_i \approx \frac{B}{e}$.
+\begin{equation}
+    \lim_{B\to\infty} Z_i = \lim_{B\to\infty} \frac{B}{e} = \infty
+\end{equation}
+so the equation \ref{eq:1} and \ref{eq:2} are the same.
+% \vspace{\stretch{1}}
+
+% \newpage
+
+\problem{3: Artificial Neural Network}{5}
+\subproblem{a} Consider a convolutional network, in which multiple weights are constrained to have the same value. Discuss how the standard backpropagation algorithm must be modified in order to ensure that such constraints are satisfied when evaluating the derivatives of an error function with respect to the adjustable parameters in the network.\\
+
+The modifications only affect derivatives with respect to weights in the convolutional layer. The units within a feature map (indexed $m$) have different inputs, but all share a common weight vector, $\mathbf{w}^{(m)} .$ Thus, errors $\delta^{(m)}$ from all units within a feature map will contribute to the derivatives of the corresponding weight vector. In this situation, $\frac{\partial E_{n}}{\partial w_{j i}}=\frac{\partial E_{n}}{\partial a_{j}} \frac{\partial a_{j}}{\partial w_{j i}}$ becomes
+$$
+\frac{\partial E_{n}}{\partial w_{i}^{(m)}}=\sum_{j} \frac{\partial E_{n}}{\partial a_{j}^{(m)}} \frac{\partial a_{j}^{(m)}}{\partial w_{i}^{(m)}}=\sum_{j} \delta_{j}^{(m)} z_{j i}^{(m)}
+$$
+Here $a_{j}^{(m)}$ denotes the activation of the $j^{\text {th }}$ unit in the $m^{\text {th }}$ feature map, whereas $w_{i}^{(m)}$ denotes the $i^{\text {th }}$ element of the corresponding feature vector and, finally, $z_{j i}^{(m)}$ denotes the $i^{\text {th }}$ input for the $j^{\text {th }}$ unit in the $m^{\text {th }}$ feature map; the latter may be an actual input or the output of a preceding layer. Note that $\delta_{j}^{(m)}=\partial E_{n} / \partial a_{j}^{(m)}$ will typically be computed recursively from the $\delta$ s of the units in the following layer, using $\delta_{j} \equiv \frac{\partial E_{n}}{\partial a_{j}}=\sum_{k} \frac{\partial E_{n}}{\partial a_{k}} \frac{\partial a_{k}}{\partial a_{j}}$. If there are layer(s) preceding the convolutional layer, the standard backward propagation equations will apply; the weights in the convolutional layer can be treated as if they were independent parameters, for the purpose of computing the $\delta$ s for the preceding layer's units.
+
+\nocite{*} % to test all bib entrys <===================================
+\bibliographystyle{plain}
+\bibliography{lib.bib} % <====== use bib file created with filecontents
+\end{document} 
